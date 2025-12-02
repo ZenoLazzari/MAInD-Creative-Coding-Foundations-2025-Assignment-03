@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width-device-width, initial-scale=1.0">
+        <title> The Dark Path - Memory Game / by Zeno T </title>
+        <link rel="stylesheet" href="style.css">
+
+    </head>
+
+ <body>
+    <audio id="bg-music" src="data/Angel_Egg_Main_Theme.mp3" autoplay loop muted></audio>
+    <div id="victory-screen">
+    <img src="img/VICTORY-Player-1.png" id="victory-image" alt="Victory!">
+     </div>
+     
+     <div id="char-selection">
+    <img src="img/PERSONAGGIO-Campione.png" alt="Personaggio 1" data-char="CARD-01" data-name="Jerimber: Champion of men">
+    <img src="img/PERSONAGGIO-Goblin.png" alt="Personaggio 2" data-char="CARD-02" data-name="Rubenski: Goblin assassin">
+    <img src="img/PERSONAGGIO-Vergine.png" alt="Personaggio 3" data-char="CARD-03" data-name="Alynn: Princess of The forgotten land">
+    <img src="img/PERSONAGGIO-Mago.png" alt="Personaggio 4" data-char="CARD-04" data-name="Mattius: Frog Wizard from the swamp">
+    <img src="img/PERSONAGGIO-Ladra.png" alt="Personaggio 5" data-char="CARD-05" data-name="Kiara: Legendary thief">
+    <img src="img/PERSONAGGIO-Spetro.png" alt="Personaggio 6" data-char="CARD-06" data-name="Ri'kardish: Spirit of a dark lord">
+
+    <div id="selection-lore-box">
+        <h2 id="lore-title">Choose your path</h2>
+        <p id="lore-desc">Hover over a character to reveal their dark past...</p>
+    </div>
+</div>
+
+<img id="selected-character" src="" alt="Personaggio scelto">
+     <div class="pergamena" id="pergamena">
+         </div>
+     <audio id="card-sound" src="data/SOUNDEFFECTs/240776__f4ngy__card-flip.wav"></audio>
+
+      <button id="restart-btn"></button>
+      <audio id="click-sound" src="data/SOUNDEFFECTs/321083__benjaminnelan__wooden-click.wav"></audio>
+     <audio id="correct-cards" src="data/SOUNDEFFECTs/171696__nenadsimic__picked-coin-echo.wav"></audio>
+    <canvas id="particleCanvas"></canvas>
+    </body>
+
+    <script src="script.js"></script>
+</html>

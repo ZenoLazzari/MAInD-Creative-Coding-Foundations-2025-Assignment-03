@@ -1,0 +1,256 @@
+/* =========================================
+   1. IMPORT FONTS & GENERAL SETTINGS
+   ========================================= */
+/* Importiamo i font Dark Fantasy da Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=MedievalSharp&display=swap');
+
+body {
+    background: fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url("img/dark-fantasy-scene.jpg"); 
+    text-align: center;
+    font-size: x-large;
+    margin: 0;
+    font-family: 'MedievalSharp', cursive; /* Font di default per il corpo */
+    overflow-x: hidden;
+    background-color: #111; /* Colore di fallback scuro */
+    transition: background-color 0.5s;
+}
+
+/* =========================================
+   2. CHARACTER SELECTION SCREEN
+   ========================================= */
+#char-selection {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.95); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    flex-wrap: wrap; 
+    gap: 20px;
+    align-content: center; 
+}
+
+#char-selection img {
+    width: 120px;
+    height: 150px;
+    object-fit: contain;
+    cursor: pointer;
+    transition: transform 0.3s, filter 0.3s;
+    filter: brightness(0.7); 
+}
+
+#char-selection img:hover {
+    transform: scale(1.2); 
+    filter: brightness(1.2) drop-shadow(0 0 10px rgba(200, 50, 50, 0.8));
+    z-index: 10;
+}
+
+/* --- LORE BOX (Titoli e Descrizioni) --- */
+#selection-lore-box {
+    width: 100%; 
+    text-align: center;
+    color: #d4c8b4;
+    margin-top: 40px;
+    min-height: 150px; 
+    padding: 0 20px;
+    pointer-events: none; 
+}
+
+#lore-title {
+    font-family: 'Cinzel Decorative', cursive;
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    margin-top: 0;
+    text-transform: uppercase;
+    color: #8a0e0e; /* Rosso sangue */
+    text-shadow: 2px 2px 0px #000;
+    letter-spacing: 3px;
+    transition: color 0.3s ease;
+}
+
+#lore-desc {
+    font-family: 'MedievalSharp', cursive;
+    font-size: 1.4rem;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+    color: #c0b090; 
+    text-shadow: 1px 1px 2px #000;
+}
+
+/* =========================================
+   3. GAME BOARD (Pergamena & Cards)
+   ========================================= */
+.pergamena {
+    background-image: url("img/Pergamena-Board_hhhhh.png"); 
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 90vw;
+    max-height: 600px;
+    max-width: 1600px;
+    aspect-ratio: 5 / 4;      
+    margin: 0 auto;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(4, max-content); 
+    grid-template-rows: repeat(5, max-content);   
+    justify-content: center;   
+    align-content: center;     
+    gap: 10px; 
+    position: relative;         
+    padding-top: 0%; 
+}
+
+/* --- CARTE (Fix per Cornice + Magic) --- */
+.card {
+    width: 90px;              
+    height: 126px;
+    
+    /* Configurazione per gestire Cornice (src) e Magic (background) insieme */
+    object-fit: cover; 
+    object-position: center;
+    
+    background-size: cover;      /* L'artwork si adatta allo sfondo */
+    background-position: center; /* L'artwork è centrato */
+    background-repeat: no-repeat;
+    
+    background-color: #000; /* Fallback nero */
+    border-radius: 6px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.6);
+    
+    cursor: pointer;
+    transition: transform 0.6s, box-shadow 0.3s; 
+    transform-style: preserve-3d;
+}
+
+.card:hover {
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+}
+
+.card.flipped {
+    transform: rotateY(180deg);
+}
+
+.card.matched {
+    opacity: 0.7; 
+    filter: grayscale(0.3);
+    border: 1px solid #333;
+}
+
+/* =========================================
+   4. UI ELEMENTS & VICTORY
+   ========================================= */
+
+#selected-character {
+    position: relative;
+    width: 180px;
+    height: 205px;
+    object-fit: contain;
+    pointer-events: none;
+    opacity: 0;
+    z-index: 100;
+    transition: opacity 0.5s, transform 0.5s;
+    margin: 0%;
+}
+
+#restart-btn {
+    position: relative;
+    bottom: 3%;         
+    background-image: url("img/RESTART-Button.png"); 
+    background-size: 30%;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100%;    
+    height: 100px;         
+    background-color: transparent;
+    border: none;
+    cursor: pointer; 
+    display: none; 
+    z-index: 10000;
+    transition: transform 0.2s;
+}
+
+#restart-btn:active {
+    transform: scale(0.95);
+}
+
+#particleCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 1500;
+}
+
+#victory-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.95);
+    display: none;                 
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+#victory-screen img {
+    width: 40vw;
+    max-width: 600px;
+    object-fit: contain;
+    animation: appearVictory 0.8s ease-out;
+}
+
+@keyframes appearVictory {
+    from { transform: scale(0.5); opacity: 0; }
+    to   { transform: scale(1); opacity: 1; }
+}
+
+/* =========================================
+   5. RESPONSIVE DESIGN
+   ========================================= */
+
+@media (min-width: 600px) {
+    .pergamena {
+        background-image: url("img/Pergamena-Board.png"); 
+        grid-template-columns: repeat(5, max-content); 
+        grid-template-rows: repeat(4, max-content);
+    }
+
+    .card {
+        width: 100px; 
+        height: 140px; 
+    }
+
+    #restart-btn {
+        background-size: 15%;
+    }
+
+    #restart-btn:hover {
+        background-size: 17%;
+    }
+}
+
+@media (min-width: 1080px) {
+    .pergamena {
+        max-width: 1200px; 
+    }
+
+    #restart-btn {
+        background-size: 10%;
+    }
+
+    #restart-btn:hover {
+        background-size: 12%;
+    }
+}
